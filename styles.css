@@ -1,0 +1,22 @@
+*,*::after, *::before{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* :root{
+    
+}
+
+body{
+
+} */
+.gameDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameScreen{
+    border: 1px solid black;
+}
