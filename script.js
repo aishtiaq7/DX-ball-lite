@@ -17,6 +17,9 @@ new InputHandler(paddle);
 
 let lastTime = 0;
 
+
+
+
 //fps
 let secondsPassed;
 let oldTimeStamp;
@@ -25,7 +28,7 @@ const fpsCount = document.getElementById("show-fps");
 
 function gameLoop(timeStamp){
     let deltaTime = timeStamp - lastTime;
-    lastTime = timeStamp;
+    lastTime = timeStamp; 
 
     ctx.clearRect(0,0,800,600);
     
@@ -36,7 +39,6 @@ function gameLoop(timeStamp){
     secondsPassed = (timeStamp - oldTimeStamp) / 1000;
     oldTimeStamp = timeStamp;
     fps = Math.round(1 / secondsPassed);
-    // console.log(`fps:${fps}`);
     fpsCount.innerText = Math.floor(fps);
 
     //BUJINAI!!!!!!!
