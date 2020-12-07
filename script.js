@@ -17,19 +17,27 @@ new InputHandler(paddle);
 
 let lastTime = 0;
 
+//fps
+let secondsPassed;
+let oldTimeStamp;
+let fps;
+const fpsCount = document.getElementById("show-fps");
 
 function gameLoop(timeStamp){
-        // console.log(`timeStamp:${timeStamp}`);
-
     let deltaTime = timeStamp - lastTime;
-        // console.log(`deltaTime:${deltaTime}`);
-    
     lastTime = timeStamp;
-        // console.log(`lastTime:${lastTime}`);
 
     ctx.clearRect(0,0,800,600);
+    
     paddle.update(deltaTime);
     paddle.draw(ctx);
+
+    //calc fps:
+    secondsPassed = (timeStamp - oldTimeStamp) / 1000;
+    oldTimeStamp = timeStamp;
+    fps = Math.round(1 / secondsPassed);
+    // console.log(`fps:${fps}`);
+    fpsCount.innerText = Math.floor(fps);
 
     //BUJINAI!!!!!!!
     requestAnimationFrame(gameLoop);
