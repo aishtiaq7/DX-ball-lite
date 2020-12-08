@@ -9,7 +9,7 @@ export default class Game{
         this.GAMEWIDTH = GAME_WIDTH;
         this.GAMEHEIGHT = GAME_HEIGHT;
         
-        console.log(`game > GameWidth:${this.GAMEWIDTH} , GameHeight:${this.GAMEHIEGHT}`);
+        // console.log(`game > GameWidth:${this.GAMEWIDTH} , GameHeight:${this.GAMEHIEGHT}`);
 
     }
 

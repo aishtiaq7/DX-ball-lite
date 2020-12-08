@@ -10,7 +10,6 @@ const GAME_WIDTH = 800;
 const GAME_HEIGHT = 600;
 
 
-console.log(`SCRIPT > GameWidth:${GAME_WIDTH} , GameHeight:${GAME_HEIGHT}`);
 
 let game = new Game(GAME_WIDTH, GAME_HEIGHT);
 
