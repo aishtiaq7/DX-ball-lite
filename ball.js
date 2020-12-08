@@ -1,11 +1,11 @@
 export default class Ball{
 
-    constructor(GameWidth,GameHeight){
-        this.GAMEWIDTH = GameWidth;
-        this.GAMEHEIGHT = GameHeight;
+    constructor(game){
+        this.GAMEWIDTH = game.GAMEWIDTH;
+        this.GAMEHEIGHT = game.GAMEHEIGHT;
 
-        this.x = GameWidth/2;
-        this.y = GameHeight/2;
+        this.x = this.GAMEWIDTH/2;
+        this.y = this.GAMEHEIGHT/2;
         this.r = 15; //px
 
         this.maxSpeed = 4;
@@ -19,7 +19,6 @@ export default class Ball{
         // console.log(`x:${this.x}, y:${this.y}\tMaxSpeed:${this.maxSpeed}`);
         
         if(deltaTime== undefined){
-            console.log(deltaTime)
             return ; 
         }
 
@@ -50,5 +49,7 @@ export default class Ball{
         ctx.arc(this.x,this.y, this.r, 0, (Math.PI/180)*360, false);
         ctx.fill();
         ctx.stroke();
+
+
     }
 }

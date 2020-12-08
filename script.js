@@ -1,6 +1,7 @@
 import Ball from './ball.js';
 import Paddle from './paddle.js';
 import InputHandler from  './input.js';
+import Game from './game.js';
 
 let canvas = document.getElementById("gameScreen");
 let ctx = canvas.getContext("2d");
@@ -8,18 +9,12 @@ let ctx = canvas.getContext("2d");
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 600;
 
-// canvas.style.width = `${GAME_WIDTH}px`;
-// canvas.style.height = `${GAME_HEIGHT}px`;
 
+console.log(`SCRIPT > GameWidth:${GAME_WIDTH} , GameHeight:${GAME_HEIGHT}`);
 
-let paddle = new Paddle(GAME_WIDTH, GAME_HEIGHT);
-let ball = new Ball(GAME_WIDTH,GAME_HEIGHT);
+let game = new Game(GAME_WIDTH, GAME_HEIGHT);
 
-
-new InputHandler(paddle);
-
-
-
+game.start();
 
 
 //fps
@@ -36,13 +31,9 @@ function gameLoop(timeStamp){
 
     ctx.clearRect(0,0,800,600);
 
-    //Paddle:
-    paddle.update(deltaTime);
-    paddle.draw(ctx);
+    game.update(deltaTime);
+    game.draw(ctx);
 
-    //Ball:
-    ball.update(deltaTime);
-    ball.draw(ctx);
 
     //calc fps:
     secondsPassed = (timeStamp - oldTimeStamp) / 1000;
