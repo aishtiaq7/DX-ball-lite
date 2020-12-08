@@ -16,14 +16,26 @@ function isCollision (paddle, ball){
     let ballBottom = ball.y + ball.r;
     let ballPositionX = ball.x;
 
+    //only comparing with TOP of paddle. 
     if( ballBottom > paddlePositionY && ballPositionX >= paddleTopLeftCorner && ballPositionX <= paddleTopRightCorner){
         // console.log('***collision***');
         return true;
     }
 
     return false;
-
-    
 }
 
-export {isCollision};
+function sideCollision(paddle,ball) {
+
+    //hitting Paddle's right side:
+    if( ball.x- ball.r < paddle.position.x + paddle.width &&
+        ball.y+ ball.r > paddle.position.y ){
+        // console.log('ball hitting right side of paddle');
+        return true;
+    }
+
+
+
+}
+
+export {isCollision, sideCollision};

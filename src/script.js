@@ -3,6 +3,10 @@ import Paddle from './paddle.js';
 import InputHandler from  './input.js';
 import Game from './game.js';
 
+
+// TODO:
+// -ball doesnt rebound proportional to the angle it hit relative to the corner of the paddle
+
 let canvas = document.getElementById("gameScreen");
 let ctx = canvas.getContext("2d");
 

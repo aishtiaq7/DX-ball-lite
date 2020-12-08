@@ -26,6 +26,9 @@ export default class Paddle {
         ctx.fillStyle = 'purple';
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
+        // console.log(`PADDLE - x:${this.position.x}, y:${this.position.y}`);
+
+
     }
 
     update(deltaTime){

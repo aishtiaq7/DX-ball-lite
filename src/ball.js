@@ -1,4 +1,4 @@
-import {isCollision } from './collision.js';
+import {isCollision, sideCollision } from './collision.js';
 
 export default class Ball{
 
@@ -19,17 +19,30 @@ export default class Ball{
 
     update(deltaTime) {
 
-        // console.log(`x:${this.x}, y:${this.y}\tMaxSpeed:${this.maxSpeed}`);
+        // console.log(`BALL - x:${this.x}, y:${this.y}`);
         
         if(deltaTime== undefined){
             return ; 
         }
 
-        //Collision Detection
-        var ballCollidesPaddle = isCollision(this.game.paddle,this);
-        if(ballCollidesPaddle){
-            console.log('ballCollidesPaddle');
+        //Collision : Ball & Top of Paddle
+        var ballCollidesPaddleTop = isCollision(this.game.paddle,this);
+        if(ballCollidesPaddleTop){
+            console.log('TOP_collision');
+            // console.log('ballCollidesPaddle');
             this.speedY *=-1;
+        }
+        
+        //Collision : Ball & Side of Paddle
+        else if( sideCollision(this.game.paddle, this) && ballCollidesPaddleTop ){
+            console.log('SIDE_collision');
+            this.speedX *= -1;
+            this.speedY *= -1;
+        }
+        else if(sideCollision(this.game.paddle, this)){
+            console.log('SIDE_collision');
+            this.speedX *= -1;
+            this.speedY *= -1;
         }
 
 
