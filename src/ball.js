@@ -1,8 +1,11 @@
+import {isCollision } from './collision.js';
+
 export default class Ball{
 
     constructor(game){
         this.GAMEWIDTH = game.GAMEWIDTH;
         this.GAMEHEIGHT = game.GAMEHEIGHT;
+        this.game = game;
 
         this.x = this.GAMEWIDTH/2;
         this.y = this.GAMEHEIGHT/2;
@@ -21,6 +24,14 @@ export default class Ball{
         if(deltaTime== undefined){
             return ; 
         }
+
+        //Collision Detection
+        var ballCollidesPaddle = isCollision(this.game.paddle,this);
+        if(ballCollidesPaddle){
+            console.log('ballCollidesPaddle');
+            this.speedY *=-1;
+        }
+
 
         //Ball 0 < x < GAMEWIDTH
         if( (this.x)<0+this.r){

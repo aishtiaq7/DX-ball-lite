@@ -1,6 +1,9 @@
+import {isCollision } from './collision.js';
+
 export default class Paddle {
 
     constructor(game){
+        this.game = game;
         this.GAMEWIDTH = game.GAMEWIDTH;
         this.GAMEHEIGHT = game.GAMEHEIGHT;
 
@@ -27,10 +30,10 @@ export default class Paddle {
 
     update(deltaTime){
 
-        console.log(`Paddle Position:{${this.position.x},${this.position.y}}`)
         if(!deltaTime) return ;
         this.position.x += this.speed;
 
+        
         if(this.position.x < 0 ){ //paddle on left edge
             this.position.x = 0;
         }
