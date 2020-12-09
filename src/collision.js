@@ -1,10 +1,9 @@
 
-//Function to determine collision between 2 objects
 import Paddle from './paddle.js';
 import Ball from './ball.js';
 
 
-// Expects Paddle and Ball object
+// Rebounds off top of paddle
 function isCollision (paddle, ball){
     
     //top of paddle:
@@ -17,7 +16,9 @@ function isCollision (paddle, ball){
     let ballPositionX = ball.x;
 
     //only comparing with TOP of paddle. 
-    if( ballBottom > paddlePositionY && ballPositionX >= paddleTopLeftCorner && ballPositionX <= paddleTopRightCorner){
+    if( ballBottom > paddlePositionY && 
+        ballPositionX >= paddleTopLeftCorner && 
+        ballPositionX <= paddleTopRightCorner){
         // console.log('***collision***');
         return true;
     }
@@ -29,13 +30,40 @@ function sideCollision(paddle,ball) {
 
     //hitting Paddle's right side:
     if( ball.x- ball.r < paddle.position.x + paddle.width &&
+        ball.x- ball.r > paddle.position.x &&
         ball.y+ ball.r > paddle.position.y ){
-        // console.log('ball hitting right side of paddle');
+        // console.log('RIGHT of paddle');
+
+        // console.log(`ball.x : ${ball.x}`);
+        // console.log(`paddle.position.x : ${paddle.position.x}`);
+
         return true;
     }
 
 
 
 }
+function ballWithPaddleLeftSide(paddle,ball) {
+    
 
-export {isCollision, sideCollision};
+
+    //hitting Paddle's left side:
+    if( ball.x+ ball.r >= paddle.position.x &&
+        ball.x+ ball.r <= paddle.position.x + paddle.width &&
+        ball.x- ball.r > 0 &&
+        ball.y+ ball.r >= paddle.position.y 
+        ){
+
+
+
+
+        // console.log('LEFT of paddle');
+        return true;
+
+    }
+
+
+
+}
+
+export {isCollision, sideCollision, ballWithPaddleLeftSide};

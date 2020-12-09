@@ -1,4 +1,4 @@
-import {isCollision, sideCollision } from './collision.js';
+import {isCollision, sideCollision,ballWithPaddleLeftSide } from './collision.js';
 
 export default class Ball{
 
@@ -19,30 +19,40 @@ export default class Ball{
 
     update(deltaTime) {
 
-        // console.log(`BALL - x:${this.x}, y:${this.y}`);
         
+        // console.log(`BALL - x:${this.x}, y:${this.y}`);
         if(deltaTime== undefined){
             return ; 
         }
 
-        //Collision : Ball & Top of Paddle
+        //Collision : Top of Paddle
         var ballCollidesPaddleTop = isCollision(this.game.paddle,this);
         if(ballCollidesPaddleTop){
-            console.log('TOP_collision');
-            // console.log('ballCollidesPaddle');
+            // console.log('Top of Paddle');
             this.speedY *=-1;
         }
-        
-        //Collision : Ball & Side of Paddle
+        //Collision : Top and Corner of paddle
         else if( sideCollision(this.game.paddle, this) && ballCollidesPaddleTop ){
-            console.log('SIDE_collision');
             this.speedX *= -1;
             this.speedY *= -1;
+            // console.log('Top and Corner');
         }
-        else if(sideCollision(this.game.paddle, this)){
-            console.log('SIDE_collision');
+
+        //Collision: Left corner of paddle
+        else if( ballWithPaddleLeftSide(this.game.paddle,this)) {
             this.speedX *= -1;
             this.speedY *= -1;
+            // console.log('Left corner');
+        }
+        //Collision: Side of paddle
+        else if(sideCollision(this.game.paddle, this)){
+            this.speedX *= -1;
+            this.speedY *= -1;
+            // console.log('Side of paddle');
+
+        }
+        else{
+            //do nothing
         }
 
 
