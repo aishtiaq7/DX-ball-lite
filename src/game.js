@@ -20,27 +20,40 @@ export default class Game{
         new InputHandler(this.paddle, this);
 
 
-        //bricks
-        // var bricks = [];
-        // for ( var i = 0; i< 10; i ++){
-        //     //
-        // }
-        var brickPositions = [];
-        const levels = Levels.level1;
+        //BRICKS
+        this.currentLevel = [];
         
-        var tempPosition = {
-            x:30,
-            y:40
-        };
+        console.log(Levels.level1);
+        Levels.level1.map( (currentValue, index)=>{
+            console.log(`currentValue:${currentValue}`); //[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            console.log(`index:${index}`);              // 
 
-        this.brick = new Brick(this, tempPosition );
-   
+            currentValue.filter( (filterValue,filterIndex) => {
+               
+                console.log(`\tfilterValue:${filterValue}`);  // -> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                console.log(`\t\ti:${filterIndex}`);    // iterator for [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                if( filterValue == 1){
+                    // console.log('*_*_*_*_*_* found ->'+ filterValue);
+                    var tempPosition = {
+                        x: (80 * filterIndex), // 80 -> brick width
+                        y: 75 + 25 * index /// 75 -> padding && 25 -> brick height
+                    };
+                    this.currentLevel.push(new Brick (this, tempPosition ));
+                    // return;
+                }
+
+            })
+            
+        });
+
+        console.log(this.currentLevel);
 
     }
 
     update(deltaTime){
         this.paddle.update(deltaTime);
         this.ball.update(deltaTime);
+
     }
     
     draw(ctx){ 
@@ -48,13 +61,10 @@ export default class Game{
         this.ball.draw(ctx);
         
 
-        //brick:
-        this.position = {
-            x:30,
-            y:40
-        }
-
-        this.brick.draw(ctx);
+    
+        this.currentLevel.forEach(brick => {
+            brick.draw(ctx);
+        });
 
     }
 }

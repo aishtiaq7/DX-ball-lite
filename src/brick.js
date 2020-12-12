@@ -7,7 +7,6 @@ export default class Brick{
    
         this.position = position;
 
-
         this.width = 80;
         this.height = 25;
 
@@ -15,7 +14,7 @@ export default class Brick{
     }
 
     draw(ctx){
-        ctx.fillStyle = 'red';
+        ctx.fillStyle = 'green';
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
     }
