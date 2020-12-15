@@ -1,15 +1,21 @@
+import {isCollision } from './collision.js';
+
 export default class Paddle {
 
-    constructor(gameWidth, gameHeight){
-        this.GAMEWIDTH = gameWidth;
-        this.GAMEHIEGHT = gameHeight;
+    constructor(game){
+        this.game = game;
+        this.GAMEWIDTH = game.GAMEWIDTH;
+        this.GAMEHEIGHT = game.GAMEHEIGHT;
 
+
+        //PADDLE dimensions
         this.width = 150;
         this.height = 30;
 
+        //Paddle Position
         this.position ={
-            x: gameWidth /2 - this.width/2,
-            y: gameHeight -this.height -10
+            x: this.GAMEWIDTH /2 - this.width/2,
+            y: this.GAMEHEIGHT -this.height -10
         }
 
         this.maxSpeed = 7;
@@ -19,6 +25,10 @@ export default class Paddle {
     draw(ctx) {
         ctx.fillStyle = 'purple';
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+
+        // console.log(`PADDLE - x:${this.position.x}, y:${this.position.y}`);
+
+
     }
 
     update(deltaTime){
@@ -26,6 +36,7 @@ export default class Paddle {
         if(!deltaTime) return ;
         this.position.x += this.speed;
 
+        
         if(this.position.x < 0 ){ //paddle on left edge
             this.position.x = 0;
         }
