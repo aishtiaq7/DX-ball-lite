@@ -11,7 +11,7 @@ export default class Ball{
         this.y = this.GAMEHEIGHT/2;
         this.r = 15; //px
 
-        this.maxSpeed = 3;
+        this.maxSpeed = 4;
         this.speedX = this.maxSpeed;
         this.speedY = this.maxSpeed;
         

@@ -51,9 +51,12 @@ export default class Game{
 
     update(deltaTime){
 
+        
         this.currentLevel.forEach(brick =>{
             brick.update(deltaTime);
         });
+
+        this.currentLevel = this.currentLevel.filter ( brick => !brick.isMarkedForDeletion);
 
         this.paddle.update(deltaTime);
         this.ball.update(deltaTime);
@@ -63,12 +66,10 @@ export default class Game{
     draw(ctx){ 
         this.paddle.draw(ctx);
         this.ball.draw(ctx);
-        
 
-    
-        this.currentLevel.forEach(brick => {
+        this.currentLevel.forEach( brick => {
             brick.draw(ctx);
-        });
+        })
 
     }
 }

@@ -26,18 +26,22 @@ export default class Brick{
             case 'left':
                 // code block
                 console.log('LEFT');
+                this.isMarkedForDeletion = true;
                 this.game.ball.speedX = this.game.ball.speedX *-1;
                 break;
             case 'right':
+                this.isMarkedForDeletion = true;
                 console.log('RIGHT');
                 this.game.ball.speedX = this.game.ball.speedX *-1;
                 break;
             case 'top':
                 console.log('TOP');
+                this.isMarkedForDeletion = true;
                 this.game.ball.speedY = this.game.ball.speedY *-1;
                 break;
             case 'bottom': 
                 console.log('BOTTOM');
+                this.isMarkedForDeletion = true;
                 this.game.ball.speedY = this.game.ball.speedY *-1;
                 break;
             case 'noHit':
@@ -52,6 +56,7 @@ export default class Brick{
     }
 
     draw(ctx){
+        // if( this.isMarkedForDeletion )
         ctx.fillStyle = 'green';
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
