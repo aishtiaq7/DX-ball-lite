@@ -11,6 +11,9 @@ export default class Brick{
    
         this.position = position;
 
+        this.x = this.position.x;
+        this.y = this.position.y;
+
         this.width = 80;
         this.height = 25;
 
@@ -28,10 +31,13 @@ export default class Brick{
                 console.log('RIGHT');
                 break;
             case 'top':
-                console.log('TOP')
+                // console.log('TOP')
                 break;
             case 'bottom': 
-                // code block
+                // console.log('BOTTOM');
+                break;
+            case 'noHit':
+                // console.log('NOHIT');
                 break;
             default:
                 throw new Error('Unpected return from function ballCollidesBrick(...)');

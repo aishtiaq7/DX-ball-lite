@@ -24,6 +24,8 @@ export default class Game{
         this.currentLevel = [];
         
         // console.log(Levels.level1);
+
+        //LOADING LEVELS: 
         Levels.level1.map( (currentValue, index)=>{
             // console.log(`currentValue:${currentValue}`); //[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
             // console.log(`index:${index}`);              // 
@@ -45,8 +47,6 @@ export default class Game{
             
         });
 
-        // console.log(this.currentLevel);
-
     }
 
     update(deltaTime){
@@ -54,6 +54,7 @@ export default class Game{
         this.currentLevel.forEach(brick =>{
             brick.update(deltaTime);
         });
+        // this.currentLevel[0].update(deltaTime);
 
         this.paddle.update(deltaTime);
         this.ball.update(deltaTime);
