@@ -12,8 +12,6 @@ export function ballCollidesBrick(ball,brick){
     let leftOfBrick = brick.x;
     let rightOfBrick = brick.x + brick.width;
 
-    // console.log(`ball:{${ball.x},${ball.y}}`);
-    // console.log(`brick:${topOfBrick},${rightOfBrick},${bottomOfBrick},${leftOfBrick}`)
 
     if(rightOfBall >= leftOfBrick && ball.x < leftOfBrick &&
         ball.y > topOfBrick && ball.y < bottomOfBrick){

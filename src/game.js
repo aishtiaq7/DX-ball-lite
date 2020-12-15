@@ -54,7 +54,6 @@ export default class Game{
         this.currentLevel.forEach(brick =>{
             brick.update(deltaTime);
         });
-        // this.currentLevel[0].update(deltaTime);
 
         this.paddle.update(deltaTime);
         this.ball.update(deltaTime);

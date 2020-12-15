@@ -5,8 +5,7 @@ export default class Brick{
         this.GAMEWIDTH = game.GAMEWIDTH;
         this.GAMEHEIGHT = game.GAMEHEIGHT;
 
-        // this.position = position;
-
+        
         this.game = game;
    
         this.position = position;
@@ -17,6 +16,7 @@ export default class Brick{
         this.width = 80;
         this.height = 25;
 
+        this.isMarkedForDeletion = false;
         // console.log(`brick created:{${this.position.x},${this.position.y}}`);
     }
 
@@ -26,15 +26,19 @@ export default class Brick{
             case 'left':
                 // code block
                 console.log('LEFT');
+                this.game.ball.speedX = this.game.ball.speedX *-1;
                 break;
             case 'right':
                 console.log('RIGHT');
+                this.game.ball.speedX = this.game.ball.speedX *-1;
                 break;
             case 'top':
-                // console.log('TOP')
+                console.log('TOP');
+                this.game.ball.speedY = this.game.ball.speedY *-1;
                 break;
             case 'bottom': 
-                // console.log('BOTTOM');
+                console.log('BOTTOM');
+                this.game.ball.speedY = this.game.ball.speedY *-1;
                 break;
             case 'noHit':
                 // console.log('NOHIT');
