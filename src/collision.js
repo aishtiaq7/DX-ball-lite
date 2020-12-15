@@ -27,7 +27,6 @@ function isCollision (paddle, ball){
 }
 
 function sideCollision(paddle,ball) {
-
     //hitting Paddle's right side:
     if( ball.x- ball.r < paddle.position.x + paddle.width &&
         ball.x- ball.r > paddle.position.x &&
@@ -44,26 +43,14 @@ function sideCollision(paddle,ball) {
 
 }
 function ballWithPaddleLeftSide(paddle,ball) {
-    
-
-
     //hitting Paddle's left side:
     if( ball.x+ ball.r >= paddle.position.x &&
         ball.x+ ball.r <= paddle.position.x + paddle.width &&
         ball.x- ball.r > 0 &&
         ball.y+ ball.r >= paddle.position.y 
         ){
-
-
-
-
-        // console.log('LEFT of paddle');
         return true;
-
     }
-
-
-
 }
 
 export {isCollision, sideCollision, ballWithPaddleLeftSide};

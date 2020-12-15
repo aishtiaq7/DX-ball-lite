@@ -23,15 +23,14 @@ export default class Game{
         //BRICKS
         this.currentLevel = [];
         
-        console.log(Levels.level1);
+        // console.log(Levels.level1);
         Levels.level1.map( (currentValue, index)=>{
-            console.log(`currentValue:${currentValue}`); //[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-            console.log(`index:${index}`);              // 
+            // console.log(`currentValue:${currentValue}`); //[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+            // console.log(`index:${index}`);              // 
 
             currentValue.filter( (filterValue,filterIndex) => {
-               
-                console.log(`\tfilterValue:${filterValue}`);  // -> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-                console.log(`\t\ti:${filterIndex}`);    // iterator for [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                // console.log(`\tfilterValue:${filterValue}`);  // -> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                // console.log(`\t\ti:${filterIndex}`);    // iterator for [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                 if( filterValue == 1){
                     // console.log('*_*_*_*_*_* found ->'+ filterValue);
                     var tempPosition = {
@@ -46,11 +45,16 @@ export default class Game{
             
         });
 
-        console.log(this.currentLevel);
+        // console.log(this.currentLevel);
 
     }
 
     update(deltaTime){
+
+        this.currentLevel.forEach(brick =>{
+            brick.update(deltaTime);
+        });
+
         this.paddle.update(deltaTime);
         this.ball.update(deltaTime);
 

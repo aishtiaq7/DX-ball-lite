@@ -19,43 +19,42 @@ export default class Ball{
 
     update(deltaTime) {
 
-        
-        // console.log(`BALL - x:${this.x}, y:${this.y}`);
         if(deltaTime== undefined){
             return ; 
         }
 
+
+
+
+        // ************** COLLISION BETWEEN BALL - PADDLE  **************
         //Collision : Top of Paddle
         var ballCollidesPaddleTop = isCollision(this.game.paddle,this);
         if(ballCollidesPaddleTop){
-            // console.log('Top of Paddle');
             this.speedY *=-1;
         }
         //Collision : Top and Corner of paddle
         else if( sideCollision(this.game.paddle, this) && ballCollidesPaddleTop ){
             this.speedX *= -1;
             this.speedY *= -1;
-            // console.log('Top and Corner');
         }
 
         //Collision: Left corner of paddle
         else if( ballWithPaddleLeftSide(this.game.paddle,this)) {
             this.speedX *= -1;
             this.speedY *= -1;
-            // console.log('Left corner');
         }
         //Collision: Side of paddle
         else if(sideCollision(this.game.paddle, this)){
             this.speedX *= -1;
             this.speedY *= -1;
-            // console.log('Side of paddle');
-
         }
         else{
             //do nothing
         }
 
 
+
+        // ************** COLLISION BETWEEN BALL - CANVAS BOUNDARY  **************
         //Ball 0 < x < GAMEWIDTH
         if( (this.x)<0+this.r){
             this.speedX = this.speedX*-1;
@@ -70,7 +69,6 @@ export default class Ball{
             this.speedY = this.speedY*-1;
         }
     
-
         this.x += this.speedX;
         this.y += this.speedY;
     }
