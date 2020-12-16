@@ -4,6 +4,14 @@ import InputHandler from  './input.js';
 import Brick from './brick.js';
 import * as Levels from './levels.js';
 
+const GAMESTATE = {
+    NEWLEVEL:0,
+    MENU:1,
+    RUNNING:2,
+    PAUSED:3,
+    GAMEOVER:4,
+}
+
 export default class Game{
     
     constructor(GAME_WIDTH, GAME_HEIGHT){
@@ -11,9 +19,13 @@ export default class Game{
         this.GAMEWIDTH = GAME_WIDTH;
         this.GAMEHEIGHT = GAME_HEIGHT;
 
+        this.gamestate = GAMESTATE;
     }
 
     start(){
+
+        this.gamestate = GAMESTATE.RUNNING;
+
         this.paddle = new Paddle(this);
         this.ball = new Ball(this);
 
@@ -51,6 +63,9 @@ export default class Game{
 
     update(deltaTime){
 
+        if (this.gamestate == GAMESTATE.PAUSED){
+            return;
+        }
         
         this.currentLevel.forEach(brick =>{
             brick.update(deltaTime);
@@ -69,7 +84,33 @@ export default class Game{
 
         this.currentLevel.forEach( brick => {
             brick.draw(ctx);
-        })
+        });
 
+        if( this.gamestate == GAMESTATE.PAUSED){
+            this.writeTextOnScreen('Game PAUSED',ctx);
+        }
+
+    }
+
+    writeTextOnScreen(text,ctx){
+        // this.writeTextOnScreen(this.gamestate, 'PAUSED GAME',ctx);
+        ctx.rect(0, 0, this.GAMEWIDTH, this.GAMEHEIGHT);
+        ctx.fillStyle = "rgba(0,0,0,0.5)";
+        ctx.fill();
+
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "white";
+        ctx.textAlign = "center";
+        ctx.fillText(text, this.GAMEWIDTH / 2, this.GAMEHEIGHT / 2);
+        
+    }
+
+    togglePause(){
+        console.log('toggling pause');
+        if( this.gamestate == GAMESTATE.RUNNING){
+            this.gamestate = GAMESTATE.PAUSED;
+        }else if( this.gamestate == GAMESTATE.PAUSED){
+            this.gamestate = GAMESTATE.RUNNING;
+        }
     }
 }

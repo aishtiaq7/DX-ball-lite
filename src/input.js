@@ -1,3 +1,5 @@
+
+
 export default class InputHandler{
 
     constructor(paddle,game){
@@ -10,6 +12,9 @@ export default class InputHandler{
                 case 37 ://left arrow
                     paddle.moveLeft();
                     break;
+
+                case 32: //SPACEBAR
+                    game.togglePause();
             
                 default:
                     break;

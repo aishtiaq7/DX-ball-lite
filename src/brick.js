@@ -25,22 +25,22 @@ export default class Brick{
         switch( BrickCollision.ballCollidesBrick(this.game.ball,this) ){
             case 'left':
                 // code block
-                console.log('LEFT');
+                // console.log('LEFT');
                 this.isMarkedForDeletion = true;
                 this.game.ball.speedX = this.game.ball.speedX *-1;
                 break;
             case 'right':
                 this.isMarkedForDeletion = true;
-                console.log('RIGHT');
+                // console.log('RIGHT');
                 this.game.ball.speedX = this.game.ball.speedX *-1;
                 break;
             case 'top':
-                console.log('TOP');
+                // console.log('TOP');
                 this.isMarkedForDeletion = true;
                 this.game.ball.speedY = this.game.ball.speedY *-1;
                 break;
             case 'bottom': 
-                console.log('BOTTOM');
+                // console.log('BOTTOM');
                 this.isMarkedForDeletion = true;
                 this.game.ball.speedY = this.game.ball.speedY *-1;
                 break;
