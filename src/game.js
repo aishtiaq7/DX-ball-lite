@@ -23,6 +23,7 @@ export default class Game{
         
         this.currentLevelIndex = 0;
         this.levels = [ Levels.level1,Levels.level2,Levels.level3 ];
+        this.lives = 1;
 
     }
 
@@ -78,6 +79,10 @@ export default class Game{
 
         if (this.gamestate == GAMESTATE.PAUSED){
             return;
+        } 
+        if ( this.lives <= 0){
+            this.gamestate =  GAMESTATE.GAMEOVER;
+            return;
         }
         
         this.currentLevel.forEach(brick =>{
@@ -110,6 +115,10 @@ export default class Game{
             this.writeTextOnScreen('Game PAUSED',ctx);
         }
 
+        if( this.gamestate == GAMESTATE.GAMEOVER){
+            this.writeTextOnScreen(`GAMEOVER! Press 'r' to Restart`, ctx);
+        }
+
     }
 
    
@@ -133,6 +142,17 @@ export default class Game{
             this.gamestate = GAMESTATE.PAUSED;
         }else if( this.gamestate == GAMESTATE.PAUSED){
             this.gamestate = GAMESTATE.RUNNING;
+        }
+    }
+
+    restartGame(){
+        console.log('restartGame called');
+        if(this.gamestate == GAMESTATE.GAMEOVER){
+            this.gamestate = GAMESTATE.RUNNING;
+            this.lives = 3;
+
+            this.start();
+            
         }
     }
 }

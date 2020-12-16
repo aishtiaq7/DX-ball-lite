@@ -1,4 +1,10 @@
-
+const GAMESTATE = {
+    NEWLEVEL:0,
+    MENU:1,
+    RUNNING:2, // done
+    PAUSED:3,  //done
+    GAMEOVER:4,
+}
 
 export default class InputHandler{
 
@@ -13,9 +19,18 @@ export default class InputHandler{
                     paddle.moveLeft();
                     break;
 
-                case 32: //SPACEBAR
+                case 32: //Pause Toggle
                     game.togglePause();
-            
+                    break;
+                case 114:
+                    // console.log(`pressed:${event.key}`);
+                    game.restartGame();
+                    break;
+                case 82:
+                    // console.log(`pressed:${event.key}`);
+                    game.restartGame();
+                    break;
+
                 default:
                     break;
             }
@@ -32,6 +47,7 @@ export default class InputHandler{
                     if(paddle.speed < 0)
                         paddle.stop();
                     break;
+
             
                 default:
                     break;

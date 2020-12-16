@@ -1,5 +1,14 @@
 import {isCollision, sideCollision,ballWithPaddleLeftSide } from './collision.js';
 
+const GAMESTATE = {
+    NEWLEVEL:0,
+    MENU:1,
+    RUNNING:2, // done
+    PAUSED:3,  //done
+    GAMEOVER:4,
+}
+
+
 export default class Ball{
 
     constructor(game){
@@ -13,7 +22,7 @@ export default class Ball{
 
         this.maxSpeed = 4;
         this.speedX = this.maxSpeed;
-        this.speedY = this.maxSpeed;
+        this.speedY = -this.maxSpeed;
         
     }
 
@@ -21,7 +30,7 @@ export default class Ball{
         this.x = this.GAMEWIDTH/2;
         this.y = this.GAMEHEIGHT/2;
         this.speedX = this.maxSpeed;
-        this.speedY = this.maxSpeed;
+        this.speedY = -this.maxSpeed;
     }
 
     update(deltaTime) {
@@ -70,10 +79,18 @@ export default class Ball{
         }
         
         //Ball 0 < y < GAMEHEIGHT
-        if( (this.y)<0+this.r){ 
+        if( (this.y) < 0+this.r ){ 
             this.speedY = this.speedY*-1;
         } else if( (this.y + this.r )> this.GAMEHEIGHT ){
+            console.log(`lives:${this.game.lives}`);
+            this.game.lives--;
             this.speedY = this.speedY*-1;
+            this.reset(); //ball reset
+
+            // if(this.game.lives<=0){
+            //     this.game.gamestate = GAMESTATE.GAMEOVER;
+            // }
+
         }
     
         this.x += this.speedX;
