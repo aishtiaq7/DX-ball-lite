@@ -7,8 +7,8 @@ import * as Levels from './levels.js';
 const GAMESTATE = {
     NEWLEVEL:0,
     MENU:1,
-    RUNNING:2,
-    PAUSED:3,
+    RUNNING:2, // done
+    PAUSED:3,  //done
     GAMEOVER:4,
 }
 
@@ -20,6 +20,10 @@ export default class Game{
         this.GAMEHEIGHT = GAME_HEIGHT;
 
         this.gamestate = GAMESTATE;
+        
+        this.currentLevelIndex = 0;
+        this.levels = [ Levels.level1,Levels.level2,Levels.level3 ];
+
     }
 
     start(){
@@ -35,18 +39,11 @@ export default class Game{
         //BRICKS
         this.currentLevel = [];
         
-        // console.log(Levels.level1);
-
         //LOADING LEVELS: 
-        Levels.level1.map( (currentValue, index)=>{
-            // console.log(`currentValue:${currentValue}`); //[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-            // console.log(`index:${index}`);              // 
-
+        
+        this.levels[this.currentLevelIndex].map( (currentValue, index)=>{
             currentValue.filter( (filterValue,filterIndex) => {
-                // console.log(`\tfilterValue:${filterValue}`);  // -> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-                // console.log(`\t\ti:${filterIndex}`);    // iterator for [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                 if( filterValue == 1){
-                    // console.log('*_*_*_*_*_* found ->'+ filterValue);
                     var tempPosition = {
                         x: (80 * filterIndex), // 80 -> brick width
                         y: 75 + 25 * index /// 75 -> padding && 25 -> brick height
@@ -54,11 +51,27 @@ export default class Game{
                     this.currentLevel.push(new Brick (this, tempPosition ));
                     // return;
                 }
-
             })
-            
         });
 
+        
+    }
+
+
+    loadNextLevel(){
+
+        this.levels[this.currentLevelIndex].map( (currentValue, index)=>{
+            currentValue.filter( (filterValue,filterIndex) => {
+                if( filterValue == 1){
+                    var tempPosition = {
+                        x: (80 * filterIndex), // 80 -> brick width
+                        y: 75 + 25 * index /// 75 -> padding && 25 -> brick height
+                    };
+                    this.currentLevel.push(new Brick (this, tempPosition ));
+                    // return;
+                }
+            })
+        });
     }
 
     update(deltaTime){
@@ -70,8 +83,15 @@ export default class Game{
         this.currentLevel.forEach(brick =>{
             brick.update(deltaTime);
         });
-
         this.currentLevel = this.currentLevel.filter ( brick => !brick.isMarkedForDeletion);
+
+        //Load next level:
+        if (this.currentLevel.length ==0){
+            this.currentLevelIndex++;
+
+            this.ball.reset();
+            this.loadNextLevel();
+        }
 
         this.paddle.update(deltaTime);
         this.ball.update(deltaTime);
@@ -92,6 +112,8 @@ export default class Game{
 
     }
 
+   
+
     writeTextOnScreen(text,ctx){
         // this.writeTextOnScreen(this.gamestate, 'PAUSED GAME',ctx);
         ctx.rect(0, 0, this.GAMEWIDTH, this.GAMEHEIGHT);
@@ -106,7 +128,7 @@ export default class Game{
     }
 
     togglePause(){
-        console.log('toggling pause');
+        // console.log('toggling pause');
         if( this.gamestate == GAMESTATE.RUNNING){
             this.gamestate = GAMESTATE.PAUSED;
         }else if( this.gamestate == GAMESTATE.PAUSED){

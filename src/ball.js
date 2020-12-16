@@ -17,6 +17,13 @@ export default class Ball{
         
     }
 
+    reset(){
+        this.x = this.GAMEWIDTH/2;
+        this.y = this.GAMEHEIGHT/2;
+        this.speedX = this.maxSpeed;
+        this.speedY = this.maxSpeed;
+    }
+
     update(deltaTime) {
 
         if(deltaTime== undefined){
