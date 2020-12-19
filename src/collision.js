@@ -35,11 +35,8 @@ function sideCollision(paddle,ball) {
 
         // console.log(`ball.x : ${ball.x}`);
         // console.log(`paddle.position.x : ${paddle.position.x}`);
-
         return true;
     }
-
-
 
 }
 function ballWithPaddleLeftSide(paddle,ball) {

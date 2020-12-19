@@ -13,14 +13,11 @@ let ctx = canvas.getContext("2d");
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 600;
 
-
-
 let game = new Game(GAME_WIDTH, GAME_HEIGHT);
 
 game.start();
 
-
-//fps
+//FPS Counter
 let secondsPassed;
 let oldTimeStamp;
 let fps;
@@ -44,9 +41,7 @@ function gameLoop(timeStamp){
     fps = Math.round(1 / secondsPassed);
     fpsCount.innerText = Math.floor(fps);
 
-
     requestAnimationFrame(gameLoop);
-
 }
 
 gameLoop()

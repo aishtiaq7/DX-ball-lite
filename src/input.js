@@ -18,7 +18,6 @@ export default class InputHandler{
                 case 37 ://left arrow
                     paddle.moveLeft();
                     break;
-
                 case 32: //Pause Toggle
                     game.togglePause();
                     break;
@@ -30,7 +29,6 @@ export default class InputHandler{
                     // console.log(`pressed:${event.key}`);
                     game.restartGame();
                     break;
-
                 default:
                     break;
             }
@@ -47,8 +45,6 @@ export default class InputHandler{
                     if(paddle.speed < 0)
                         paddle.stop();
                     break;
-
-            
                 default:
                     break;
             }

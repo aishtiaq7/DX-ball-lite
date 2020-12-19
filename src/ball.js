@@ -8,7 +8,6 @@ const GAMESTATE = {
     GAMEOVER:4,
 }
 
-
 export default class Ball{
 
     constructor(game){
@@ -39,9 +38,6 @@ export default class Ball{
             return ; 
         }
 
-
-
-
         // ************** COLLISION BETWEEN BALL - PADDLE  **************
         //Collision : Top of Paddle
         var ballCollidesPaddleTop = isCollision(this.game.paddle,this);
@@ -68,8 +64,6 @@ export default class Ball{
             //do nothing
         }
 
-
-
         // ************** COLLISION BETWEEN BALL - CANVAS BOUNDARY  **************
         //Ball 0 < x < GAMEWIDTH
         if( (this.x)<0+this.r){
@@ -82,7 +76,7 @@ export default class Ball{
         if( (this.y) < 0+this.r ){ 
             this.speedY = this.speedY*-1;
         } else if( (this.y + this.r )> this.GAMEHEIGHT ){
-            console.log(`lives:${this.game.lives}`);
+            // console.log(`lives:${this.game.lives}`);
             this.game.lives--;
             this.speedY = this.speedY*-1;
             this.reset(); //ball reset
@@ -92,20 +86,16 @@ export default class Ball{
             // }
 
         }
-    
         this.x += this.speedX;
         this.y += this.speedY;
     }
 
     draw(ctx){
-        
         ctx.fillStyle = 'red';
         ctx.beginPath();
         // arc(x, y, radius, startAngle, endAngle, anticlockwise)
         ctx.arc(this.x,this.y, this.r, 0, (Math.PI/180)*360, false);
         ctx.fill();
         ctx.stroke();
-
-
     }
 }

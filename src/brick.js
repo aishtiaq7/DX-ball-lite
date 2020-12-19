@@ -4,12 +4,10 @@ export default class Brick{
     constructor(game, position){
         this.GAMEWIDTH = game.GAMEWIDTH;
         this.GAMEHEIGHT = game.GAMEHEIGHT;
-
         
         this.game = game;
-   
-        this.position = position;
 
+        this.position = position;
         this.x = this.position.x;
         this.y = this.position.y;
 
@@ -17,14 +15,12 @@ export default class Brick{
         this.height = 25;
 
         this.isMarkedForDeletion = false;
-        // console.log(`brick created:{${this.position.x},${this.position.y}}`);
     }
 
     update(deltaTime){
         // ************** COLLISION BETWEEN BALL - BRICK  **************
         switch( BrickCollision.ballCollidesBrick(this.game.ball,this) ){
             case 'left':
-                // code block
                 // console.log('LEFT');
                 this.isMarkedForDeletion = true;
                 this.game.ball.speedX = this.game.ball.speedX *-1;
@@ -50,9 +46,6 @@ export default class Brick{
             default:
                 throw new Error('Unpected return from function ballCollidesBrick(...)');
         }
-
-
-
     }
 
     draw(ctx){

@@ -3,14 +3,14 @@
     margin: 0;
     box-sizing: border-box;
 }
-
-/* :root{
+/* 
+ :root{
     
-}
+} */
 
 body{
-
-} */
+    background-color: beige;
+} 
 .gameDiv{
     display: flex;
     justify-content: center;
@@ -32,4 +32,9 @@ body{
 
     background-color: rgb(0, 0, 0);
     color: white;
+}
+
+.lives-Remaining{
+    width: 100%;
+    text-align: center;
 }

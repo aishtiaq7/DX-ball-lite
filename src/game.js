@@ -4,12 +4,14 @@ import InputHandler from  './input.js';
 import Brick from './brick.js';
 import * as Levels from './levels.js';
 
+const showLivesRemaining = document.getElementById("livesRemaining"); 
+
 const GAMESTATE = {
     NEWLEVEL:0,
     MENU:1,
     RUNNING:2, // done
     PAUSED:3,  //done
-    GAMEOVER:4,
+    GAMEOVER:4, //done 
 }
 
 export default class Game{
@@ -23,12 +25,11 @@ export default class Game{
         
         this.currentLevelIndex = 0;
         this.levels = [ Levels.level1,Levels.level2,Levels.level3 ];
-        this.lives = 1;
+        this.lives = 3;
 
     }
 
     start(){
-
         this.gamestate = GAMESTATE.RUNNING;
 
         this.paddle = new Paddle(this);
@@ -36,12 +37,10 @@ export default class Game{
 
         new InputHandler(this.paddle, this);
 
-
         //BRICKS
         this.currentLevel = [];
         
         //LOADING LEVELS: 
-        
         this.levels[this.currentLevelIndex].map( (currentValue, index)=>{
             currentValue.filter( (filterValue,filterIndex) => {
                 if( filterValue == 1){
@@ -54,13 +53,9 @@ export default class Game{
                 }
             })
         });
-
-        
     }
 
-
     loadNextLevel(){
-
         this.levels[this.currentLevelIndex].map( (currentValue, index)=>{
             currentValue.filter( (filterValue,filterIndex) => {
                 if( filterValue == 1){
@@ -84,6 +79,9 @@ export default class Game{
             this.gamestate =  GAMESTATE.GAMEOVER;
             return;
         }
+        if ( this.currentLevelIndex == this.levels.length){
+            console.log("Called");
+        }
         
         this.currentLevel.forEach(brick =>{
             brick.update(deltaTime);
@@ -100,7 +98,6 @@ export default class Game{
 
         this.paddle.update(deltaTime);
         this.ball.update(deltaTime);
-
     }
     
     draw(ctx){ 
@@ -119,9 +116,14 @@ export default class Game{
             this.writeTextOnScreen(`GAMEOVER! Press 'r' to Restart`, ctx);
         }
 
+        this.displayNumberOfLivesRemaining();
+
     }
 
-   
+    displayNumberOfLivesRemaining(){
+        showLivesRemaining.innerText = this.lives;
+
+    }
 
     writeTextOnScreen(text,ctx){
         // this.writeTextOnScreen(this.gamestate, 'PAUSED GAME',ctx);
@@ -146,13 +148,11 @@ export default class Game{
     }
 
     restartGame(){
-        console.log('restartGame called');
+        // console.log('restartGame called');
         if(this.gamestate == GAMESTATE.GAMEOVER){
             this.gamestate = GAMESTATE.RUNNING;
             this.lives = 3;
-
             this.start();
-            
         }
     }
 }
