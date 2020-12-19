@@ -4,6 +4,9 @@ Game objective
     Using left and right arrow keys and with 3 lives only, you can move the paddle in the bottom to
     of the screen to rebound the constantly moving ball to pop all the bricks in each level to win!
 
+Play this game here:
+https://aishtiaq7.github.io/DX-ball-lite/.
+
 
 DX-ball-lite is implemented using pure Vanilla Javascrip, CSS and HTML ( without any framworks).
 Core concepts in JS include: 
